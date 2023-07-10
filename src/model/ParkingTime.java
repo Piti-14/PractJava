@@ -9,7 +9,6 @@ public class ParkingTime {
 	
 	public ParkingTime(Date entryTime) {
 		this.entryTime = entryTime;
-		this.exitTime = null;
 	}
 		
 	public void setExitTime(Date exitTime) {

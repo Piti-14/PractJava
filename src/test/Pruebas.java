@@ -7,13 +7,13 @@ import model.Official;
 import model.Resident;
 import model.Vehicle;
 
-//import view.MainFrame;
+import view.MainFrame;
 
 public class Pruebas {
 
 	public static void main(String[] args) {
 		
-		//MainFrame mf = new MainFrame();
+		MainFrame mf = new MainFrame();
 		
 		ArrayList<Vehicle> cars = new ArrayList<>();
 		
