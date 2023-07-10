@@ -1,22 +1,32 @@
 package model;
 
-import java.time.LocalTime;
+import java.util.Date;
 
 public class ParkingTime {
 	
-	private LocalTime entryTime;
-	private LocalTime exitTime;
+	private Date entryTime;
+	private Date exitTime;
 	
-	public ParkingTime(LocalTime entryTime, LocalTime exitTime) {
+	public ParkingTime(Date entryTime) {
 		this.entryTime = entryTime;
+		this.exitTime = null;
+	}
+		
+	public void setExitTime(Date exitTime) {
 		this.exitTime = exitTime;
 	}
 	
-	public LocalTime getEntryTime() {
+	public Date getEntryTime() {
 		return entryTime;
 	}
 	
-	public LocalTime getExitTime() {
+	public Date getExitTime() {
 		return exitTime;
 	}
+	
+	public long totalTime() {
+		long duration = exitTime.getTime() - entryTime.getTime(); //time in miliseconds!!
+		return duration / (60 * 1000); //60 as per a minute and 1000 as per a second
+	}
+	
 }
