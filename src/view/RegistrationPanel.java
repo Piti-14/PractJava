@@ -1,67 +1,53 @@
 package view;
 
 import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 import javax.swing.JTextField;
-import javax.swing.JCheckBox;
+import javax.swing.JButton;
 
 @SuppressWarnings("serial")
-public class RegistrationPanel extends JPanel {
-	private JTextField textField;
-	private JTextField hourField;
-	private JTextField minuteField;
+public abstract class RegistrationPanel extends JPanel {
+	
+	protected JTextField plateTxt;
+	protected JLabel registerPanelLbl, plateLbl;
+	protected JButton saveBtn, returnBtn;
+	protected CentralPanel central;
 
-	/**
-	 * Create the panel.
-	 */
 	public RegistrationPanel() {
-		setLayout(new MigLayout("", "[][][grow]", "[][][][][][][][][][]"));
+		setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("VEHICLE REGISTRATION");
-		lblNewLabel_1.setFont(new Font("Nirmala UI Semilight", Font.BOLD, 14));
-		add(lblNewLabel_1, "cell 0 0 3 1,alignx center");
+		registerPanelLbl = new JLabel("REGISTER VEHICLE");
+		registerPanelLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		registerPanelLbl.setFont(new Font("Tw Cen MT", Font.BOLD, 20));
+		registerPanelLbl.setBounds(10, 11, 280, 28);
+		add(registerPanelLbl);
 		
-		JLabel PlateLabel = new JLabel("Plate");
-		PlateLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		add(PlateLabel, "cell 0 2,alignx trailing");
+		plateLbl = new JLabel("License Plate");
+		plateLbl.setFont(new Font("Tw Cen MT", Font.BOLD, 16));
+		plateLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		plateLbl.setBounds(10, 80, 120, 28);
+		add(plateLbl);
 		
-		textField = new JTextField();
-		add(textField, "cell 2 2");
-		textField.setColumns(12);
+		plateTxt = new JTextField();
+		plateTxt.setBounds(127, 85, 150, 20);
+		add(plateTxt);
+		plateTxt.setColumns(10);
 		
-		JLabel hourLabel = new JLabel("Entry hour");
-		hourLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		add(hourLabel, "cell 0 4,alignx trailing");
+		saveBtn = new JButton("Save");
+		saveBtn.setFont(new Font("SimSun", Font.BOLD, 14));
+		saveBtn.setBounds(188, 132, 89, 23);
+		add(saveBtn);
 		
-		hourField = new JTextField();
-		add(hourField, "flowx,cell 2 6,alignx left");
-		hourField.setColumns(5);
+		returnBtn = new JButton("Back");
+		returnBtn.setFont(new Font("SimSun", Font.BOLD, 14));
+		returnBtn.setBounds(188, 166, 89, 23);
+		add(returnBtn);
 		
-		JLabel lblNewLabel = new JLabel("Type of Vehicle");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		add(lblNewLabel, "cell 0 7");
-		
-		JCheckBox typeOfficialChBx = new JCheckBox("Official");
-		add(typeOfficialChBx, "cell 2 7");
-		
-		JCheckBox typeResidentChBx = new JCheckBox("Resident");
-		typeResidentChBx.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		add(typeResidentChBx, "cell 2 8");
-		
-		JCheckBox typeNonResidentChBx = new JCheckBox("Non resident");
-		typeNonResidentChBx.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		add(typeNonResidentChBx, "cell 2 9");
-		
-		JLabel timeSeparatorLabel = new JLabel(" : ");
-		timeSeparatorLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		add(timeSeparatorLabel, "cell 2 6");
-		
-		minuteField = new JTextField();
-		add(minuteField, "cell 2 6");
-		minuteField.setColumns(5);
-
 	}
-
+	
+	public void setCentralPanel(CentralPanel central) {
+		this.central = central;
+	}
 }

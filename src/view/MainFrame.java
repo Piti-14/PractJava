@@ -6,8 +6,9 @@ import javax.swing.JFrame;
 public class MainFrame extends JFrame {
 
 	public MainFrame() {
-		setTitle("Frame test");
-		setBounds(0,0,400,400);
+		setTitle("Parking Manager - v4.8.0");
+		setBounds(0,0,300,300);
+		setResizable(false);
 		
 		MainPanel panel = new MainPanel();
 		add(panel);
