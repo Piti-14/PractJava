@@ -36,6 +36,11 @@ public class ResidentList {
 	}
 	
 	public static void addResident(Resident r) {
+		for (Resident resident : residentVehicles) {
+			if (resident.getPlate().equals(r.getPlate())) {
+				return;
+			}
+		}
 		residentVehicles.add(r);
 	}
 	

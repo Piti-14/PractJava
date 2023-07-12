@@ -36,6 +36,11 @@ public class OfficialList {
 	}
 	
 	public static void addOfficial(Official o) {
+		for (Official official : officialVehicles) {
+			if (official.getPlate().equals(o.getPlate())) {
+				return;
+			}
+		}
 		officialVehicles.add(o);
 	}
 	

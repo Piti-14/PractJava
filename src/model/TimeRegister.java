@@ -15,24 +15,50 @@ public class TimeRegister {
 	public void newEntry() {
 		
 		if (!registered) {
-			searchAndVerify(OfficialList.getOfficialList());
+			searchAndVerifyEntry(OfficialList.getOfficialList());
 		}
 		
 		if (!registered) {
-			searchAndVerify(ResidentList.getResidentList());
+			searchAndVerifyEntry(ResidentList.getResidentList());
 		}
 		
 		if (!registered) {
-			searchAndVerify(NonResidentList.getNonResidentList());
+			if (NonResidentList.getNonResidentList().size() == 0) {
+				NonResident nr = new NonResident(plate);
+				nr.setParkedTime(new ParkingTime(new Date()));
+				NonResidentList.addNonResident(nr);
+			} else {
+				searchAndVerifyEntry(NonResidentList.getNonResidentList());
+			}
 		}
 		
-		NonResident nr = new NonResident(plate);
-		nr.setParkedTime(new ParkingTime(new Date()));
-		NonResidentList.addNonResident(nr);
+		registered = false;
+	}
+	
+	public void newExit(String plate) {
 		
+		if (!registered) {
+			searchAndVerifyExit(OfficialList.getOfficialList());
+		}
+		
+		if (!registered) {
+			searchAndVerifyExit(ResidentList.getResidentList());
+		}
+		
+		if (!registered) {
+			if (NonResidentList.getNonResidentList().size() == 0) {
+				NonResident nr = new NonResident(plate);
+				nr.setParkedTime(new ParkingTime(new Date()));
+				NonResidentList.addNonResident(nr);
+			} else {
+				searchAndVerifyExit(NonResidentList.getNonResidentList());
+			}
+		}
+		
+		registered = false;
 	}
 
-	private void searchAndVerify(ArrayList<? extends Vehicle> list) {
+	private void searchAndVerifyEntry(ArrayList<? extends Vehicle> list) {
 		for (Vehicle v : list) {
 			
 			if (v.getPlate().equals(plate)) {
@@ -45,7 +71,16 @@ public class TimeRegister {
 		}
 	}
 	
-	public void newExit(String plate) {
-		
+	private void searchAndVerifyExit(ArrayList<? extends Vehicle> list) {
+		for (Vehicle v : list) {
+			
+			if (v.getPlate().equals(plate)) {
+				if (v.getParkingTime().getExitTime() == null) {//Vehicle is still parked
+					
+					v.setParkedTime(new ParkingTime(new Date()));
+				}
+				registered = true;
+			}
+		}
 	}
 }
