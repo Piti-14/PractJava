@@ -1,5 +1,6 @@
 package view;
 
+import controller.ExitRegistrationController;
 import controller.MainPanelController;
 
 @SuppressWarnings("serial")
@@ -11,7 +12,7 @@ public class ExitRegistrationPanel extends RegistrationPanel {
 		
 		registerPanelLbl.setText("REGISTER EXIT");
 		
-		saveBtn.addActionListener(null);
+		saveBtn.addActionListener(new ExitRegistrationController(plateTxt));
 		returnBtn.addActionListener(new MainPanelController(central));
 	}
 }

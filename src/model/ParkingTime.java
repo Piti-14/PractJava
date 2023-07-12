@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class ParkingTime {
 	
-	private Date entryTime;
-	private Date exitTime;
+	private Date entryTime = null;
+	private Date exitTime = null;
 	
 	public ParkingTime(Date entryTime) {
 		this.entryTime = entryTime;
@@ -26,6 +26,11 @@ public class ParkingTime {
 	public long totalTime() {
 		long duration = exitTime.getTime() - entryTime.getTime(); //time in miliseconds!!
 		return duration / (60 * 1000); //60 as per a minute and 1000 as per a second
+	}
+	
+	public void reset() {
+		entryTime = null;
+		exitTime = null;
 	}
 	
 }

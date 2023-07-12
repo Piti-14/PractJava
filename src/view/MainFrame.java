@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.JFrame;
 
+import controller.MainFrameController;
+
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
@@ -14,7 +16,9 @@ public class MainFrame extends JFrame {
 		add(panel);
 		
 		setVisible(true);
-		setDefaultCloseOperation(3);
+		//setDefaultCloseOperation();
+		
+		addWindowListener(new MainFrameController());
 	}
 
 }

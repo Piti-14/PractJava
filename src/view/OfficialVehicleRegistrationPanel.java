@@ -1,7 +1,7 @@
 package view;
 
 import controller.MainPanelController;
-import controller.VehicleRegistrationController;
+import controller.OfficialRegistrationController;
 
 @SuppressWarnings("serial")
 public class OfficialVehicleRegistrationPanel extends RegistrationPanel {
@@ -12,7 +12,7 @@ public class OfficialVehicleRegistrationPanel extends RegistrationPanel {
 		
 		registerPanelLbl.setText("REGISTER OFFICIAL VEHICLE");
 		
-		saveBtn.addActionListener(new VehicleRegistrationController(plateTxt.getText()));
+		saveBtn.addActionListener(new OfficialRegistrationController(plateTxt));
 		returnBtn.addActionListener(new MainPanelController(central));		
 	}
 }
