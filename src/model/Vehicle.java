@@ -1,12 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public abstract class Vehicle {
 	
 	private String plate;
 	protected double minutePrice;
-	protected ParkingTime stayedTime;
+	protected ParkingTime stayedTime = new ParkingTime();
 	protected ArrayList<ParkingTime> stays = new ArrayList<>();
 	
 	public Vehicle(String plate) {
@@ -14,8 +15,8 @@ public abstract class Vehicle {
 		minutePrice = 0.0;
 	}
 	
-	public void setParkedTime(ParkingTime time) {
-		this.stayedTime = time;
+	public void setParkedTime(Date entry) {
+		this.stayedTime.setEntryTime(entry);
 	}
 	
 	public ParkingTime getParkingTime() {
@@ -36,5 +37,13 @@ public abstract class Vehicle {
 	
 	public void addStay(ParkingTime pt) {
 		stays.add(pt);
+	}
+	
+	public void clearStayedTime() {
+		this.stayedTime.reset();
+	}
+	
+	public void saveStaysRegistry() {
+		
 	}
 }

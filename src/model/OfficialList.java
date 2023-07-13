@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class OfficialList {
 	
@@ -18,7 +19,10 @@ public class OfficialList {
 			String line = read.readLine();
 			
 			while(line != null) {
-				Official v = new Official(line.trim());
+				String[] data = line.split(",");
+ 				Official v = new Official(data[0]);
+ 				Date entry = new Date(Long.parseLong(data[1]));
+ 				v.getParkingTime().setEntryTime(entry);
 				officialVehicles.add(v);
 				
 				line = read.readLine();
@@ -52,8 +56,14 @@ public class OfficialList {
 		try {
 			BufferedWriter write = new BufferedWriter(new FileWriter(file));
 			
-			for (Official o : officialVehicles) {								
+			for (Official o : officialVehicles) {
 				write.write(o.getPlate());
+				if (o.getParkingTime().getEntryTime() != null) {
+					write.write("," + o.getParkingTime().getEntryTime().getTime());
+				} else {
+					write.write(",0");
+				}
+				
 				write.newLine();
 			}
 			

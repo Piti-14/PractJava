@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ResidentList {
 	
@@ -18,8 +19,13 @@ public class ResidentList {
 			String line = read.readLine();
 			
 			while(line != null) {
-				Resident v = new Resident(line.trim());
-				residentVehicles.add(v);
+				
+				String[] data = line.split(",");
+				Resident r = new Resident(data[0]);
+				r.setMonthlyMinutes(Integer.parseInt(data[1]));
+				Date entry = new Date(Long.parseLong(data[2]));
+				r.getParkingTime().setEntryTime(entry);
+				residentVehicles.add(r);
 				
 				line = read.readLine();
 			}
@@ -53,7 +59,13 @@ public class ResidentList {
 			BufferedWriter write = new BufferedWriter(new FileWriter(file));
 			
 			for (Resident r : residentVehicles) {
-				write.write(r.getPlate());
+				write.write(r.getPlate() + "," + r.getTotalMinutes());
+				
+				if (r.getParkingTime().getEntryTime() != null) { //Still parked when shutting down the system
+					write.write("," + r.getParkingTime().getEntryTime().getTime());
+				} else {
+					write.write(",0");
+				}
 				write.newLine();
 			}
 			

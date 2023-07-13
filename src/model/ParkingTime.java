@@ -4,13 +4,15 @@ import java.util.Date;
 
 public class ParkingTime {
 	
-	private Date entryTime = null;
-	private Date exitTime = null;
+	private Date entryTime;
+	private Date exitTime;
 	
-	public ParkingTime(Date entryTime) {
-		this.entryTime = entryTime;
+	public ParkingTime() {}
+	
+	public void setEntryTime(Date entry) {
+		this.entryTime = entry;
 	}
-		
+	
 	public void setExitTime(Date exitTime) {
 		this.exitTime = exitTime;
 	}
@@ -25,12 +27,11 @@ public class ParkingTime {
 	
 	public long totalTime() {
 		long duration = exitTime.getTime() - entryTime.getTime(); //time in miliseconds!!
-		return duration / (60 * 1000); //60 as per a minute and 1000 as per a second
+		return duration / (60 * 1000); //1000 as per a second and 60 as per a minute
 	}
 	
 	public void reset() {
 		entryTime = null;
 		exitTime = null;
 	}
-	
 }

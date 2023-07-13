@@ -11,12 +11,11 @@ public class Resident extends Vehicle {
 		minutePrice = price;
 	}
 	
-	public void setMonthlyMinutes(int minutes) {
+	public void setMonthlyMinutes(long minutes) {
 		this.totalMinutes += minutes;
 	}
 	
 	public int getTotalMinutes() {
 		return totalMinutes;
 	}
-	
 }

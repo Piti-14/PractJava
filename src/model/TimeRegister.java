@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 public class TimeRegister {
 	
 	private String plate;
@@ -17,44 +19,39 @@ public class TimeRegister {
 		if (!registered) {
 			searchAndVerifyEntry(OfficialList.getOfficialList());
 		}
-		
 		if (!registered) {
 			searchAndVerifyEntry(ResidentList.getResidentList());
 		}
-		
 		if (!registered) {
 			if (NonResidentList.getNonResidentList().size() == 0) {
 				NonResident nr = new NonResident(plate);
-				nr.setParkedTime(new ParkingTime(new Date()));
+				nr.setParkedTime(new Date());
 				NonResidentList.addNonResident(nr);
 			} else {
 				searchAndVerifyEntry(NonResidentList.getNonResidentList());
 			}
 		}
-		
 		registered = false;
 	}
 	
-	public void newExit(String plate) {
+	
+	public void newExit() {
 		
 		if (!registered) {
 			searchAndVerifyExit(OfficialList.getOfficialList());
 		}
-		
 		if (!registered) {
 			searchAndVerifyExit(ResidentList.getResidentList());
 		}
-		
 		if (!registered) {
 			if (NonResidentList.getNonResidentList().size() == 0) {
 				NonResident nr = new NonResident(plate);
-				nr.setParkedTime(new ParkingTime(new Date()));
+				nr.setParkedTime(new Date());
 				NonResidentList.addNonResident(nr);
 			} else {
 				searchAndVerifyExit(NonResidentList.getNonResidentList());
 			}
 		}
-		
 		registered = false;
 	}
 
@@ -62,9 +59,11 @@ public class TimeRegister {
 		for (Vehicle v : list) {
 			
 			if (v.getPlate().equals(plate)) {
-				if (v.getParkingTime().getEntryTime() == null) {//Vehicle is not parked
-					
-					v.setParkedTime(new ParkingTime(new Date()));
+				if (v.getParkingTime().getEntryTime().equals(new Date(0))) {//Vehicle is not parked
+
+					v.setParkedTime(new Date());
+				} else {
+					JOptionPane.showMessageDialog(null, "Vehicle already parked!") ;
 				}
 				registered = true;
 			}
@@ -77,7 +76,21 @@ public class TimeRegister {
 			if (v.getPlate().equals(plate)) {
 				if (v.getParkingTime().getExitTime() == null) {//Vehicle is still parked
 					
-					v.setParkedTime(new ParkingTime(new Date()));
+					v.getParkingTime().setExitTime(new Date());
+					ParkingTime stay = v.getParkingTime();
+					
+					if (v instanceof Official) {
+						v.addStay(stay);
+						v.clearStayedTime();
+					} else if (v instanceof Resident) {
+						v.addStay(stay);
+						((Resident) v).setMonthlyMinutes(stay.totalTime());
+						v.clearStayedTime();
+					} else {
+						double ticket = Payment.calculatePayment(v);
+						JOptionPane.showMessageDialog(null, "You owe " + ticket + "$, "
+								+ "\ngrab the ticket and pay it at the attendant's hut.") ;
+					}
 				}
 				registered = true;
 			}
