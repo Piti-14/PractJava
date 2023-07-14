@@ -7,6 +7,7 @@ public abstract class Vehicle {
 	
 	private String plate;
 	protected double minutePrice;
+	protected int totalMinutes;
 	protected ParkingTime stayedTime = new ParkingTime();
 	protected ArrayList<ParkingTime> stays = new ArrayList<>();
 	
@@ -43,7 +44,15 @@ public abstract class Vehicle {
 		this.stayedTime.reset();
 	}
 	
-	public void saveStaysRegistry() {
-		
+	public void setMonthlyMinutes(long minutes) {
+		this.totalMinutes += minutes;
 	}
+	
+	public int getTotalMinutes() {
+		return totalMinutes;
+	}
+	
+	/*public void saveStaysRegistry() {
+		
+	}*/
 }

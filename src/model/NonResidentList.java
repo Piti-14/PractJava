@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class NonResidentList {
 	
-	private static ArrayList<Official> nonResidentVehicles = new ArrayList<Official>();
+	private static ArrayList<NonResident> nonResidentVehicles = new ArrayList<>();
 	
 	public static void readVehicleData(String file) {
 		
@@ -19,11 +19,12 @@ public class NonResidentList {
 			String line = read.readLine();
 			
 			while(line != null) {
-				String[] data = line.split(",");
- 				Official v = new Official(data[0]);
- 				Date entry = new Date(Long.parseLong(data[1]));
- 				v.getParkingTime().setEntryTime(entry);
-				officialVehicles.add(v);
+				String[] data = line.split(",");//plate,minutes,date
+ 				NonResident nr = new NonResident(data[0]);
+ 				nr.setMonthlyMinutes(Integer.parseInt(data[1]));
+ 				Date entry = new Date(Long.parseLong(data[2]));
+ 				nr.getParkingTime().setEntryTime(entry);
+				nonResidentVehicles.add(nr);
 				
 				line = read.readLine();
 			}
@@ -35,35 +36,35 @@ public class NonResidentList {
 		}
 	}
 	
-	public static ArrayList<Official> getOfficialList() {
-		return officialVehicles;
+	public static ArrayList<NonResident> getNonResidentList() {
+		return nonResidentVehicles;
 	}
 	
-	public static void addOfficial(Official o) {
-		for (Official official : officialVehicles) {
-			if (official.getPlate().equals(o.getPlate())) {
+	public static void addNonResident(NonResident nr) {
+		for (NonResident nonResident : nonResidentVehicles) {
+			if (nonResident.getPlate().equals(nr.getPlate())) {
 				return;
 			}
 		}
-		officialVehicles.add(o);
+		nonResidentVehicles.add(nr);
 	}
 	
-	public static void clearOfficials() {
-		officialVehicles.clear();
+	public static void clearNonResidents() {
+		nonResidentVehicles.clear();
 	}
 	
 	public static void saveVehicleData(String file) {
 		try {
 			BufferedWriter write = new BufferedWriter(new FileWriter(file));
 			
-			for (Official o : officialVehicles) {
-				write.write(o.getPlate());
-				if (o.getParkingTime().getEntryTime() != null) {
-					write.write("," + o.getParkingTime().getEntryTime().getTime());
+			for (NonResident nonResident : nonResidentVehicles) {
+				write.write(nonResident.getPlate() + "," + nonResident.getTotalMinutes());
+				
+				if (nonResident.getParkingTime().getEntryTime() != null) {
+					write.write("," + nonResident.getParkingTime().getEntryTime().getTime());
 				} else {
 					write.write(",0");
 				}
-				
 				write.newLine();
 			}
 			

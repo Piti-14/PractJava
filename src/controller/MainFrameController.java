@@ -2,26 +2,25 @@ package controller;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.Date;
-
-import javax.swing.JOptionPane;
-
-import model.NonResident;
 import model.NonResidentList;
 import model.OfficialList;
-import model.Payment;
 import model.ResidentList;
 
 public class MainFrameController implements WindowListener{
 	
 	private static final String OFFICIAL_VEHICLES = "src/recursos/OfficialVehicles";
 	private static final String RESIDENT_VEHICLES = "src/recursos/ResidentVehicles";
+	private static final String NON_RESIDENT_VEHICLES = "src/recursos/NonResidentVehicles";
 	
 	@Override
 	public void windowOpened(WindowEvent e) {
 		// TODO Auto-generated method stub
 		OfficialList.readVehicleData(OFFICIAL_VEHICLES);
 		ResidentList.readVehicleData(RESIDENT_VEHICLES);
+		NonResidentList.readVehicleData(NON_RESIDENT_VEHICLES);
+		
+		System.out.println(OfficialList.getOfficialList().get(0).getParkingTime().getEntryTime());
+		System.out.println(OfficialList.getOfficialList().get(0).getParkingTime().getExitTime());
 	}
 
 	@Override
@@ -29,6 +28,7 @@ public class MainFrameController implements WindowListener{
 		// TODO Auto-generated method stub
 		OfficialList.saveVehicleData(OFFICIAL_VEHICLES);
 		ResidentList.saveVehicleData(RESIDENT_VEHICLES);
+		NonResidentList.saveVehicleData(NON_RESIDENT_VEHICLES);
 		
 		/*for (NonResident vehicle : NonResidentList.getNonResidentList()) {
 			vehicle.getParkingTime().setExitTime(new Date());
