@@ -52,6 +52,10 @@ public abstract class Vehicle {
 		return totalMinutes;
 	}
 	
+	public void setTotalMinutes(int minutes) {
+		this.totalMinutes = minutes;
+	}
+	
 	/*public void saveStaysRegistry() {
 		
 	}*/

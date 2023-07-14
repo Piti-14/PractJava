@@ -83,7 +83,7 @@ public class TimeRegister {
 						v.clearStayedTime();
 					} else if (v instanceof Resident) {
 						v.addStay(stay);
-						((Resident) v).setMonthlyMinutes(stay.totalTime());
+						v.setMonthlyMinutes(stay.totalTime());
 						v.clearStayedTime();
 					} else {
 						double ticket = Payment.calculatePayment(v);

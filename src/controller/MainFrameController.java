@@ -18,9 +18,6 @@ public class MainFrameController implements WindowListener{
 		OfficialList.readVehicleData(OFFICIAL_VEHICLES);
 		ResidentList.readVehicleData(RESIDENT_VEHICLES);
 		NonResidentList.readVehicleData(NON_RESIDENT_VEHICLES);
-		
-		System.out.println(OfficialList.getOfficialList().get(0).getParkingTime().getEntryTime());
-		System.out.println(OfficialList.getOfficialList().get(0).getParkingTime().getExitTime());
 	}
 
 	@Override

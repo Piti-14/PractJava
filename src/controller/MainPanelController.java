@@ -2,7 +2,11 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.Date;
+import javax.swing.JOptionPane;
+import model.OfficialList;
+import model.ResidentList;
+import model.Vehicle;
 import view.CentralPanel;
 
 public class MainPanelController implements ActionListener{
@@ -28,7 +32,21 @@ public class MainPanelController implements ActionListener{
 			
 			case "Generate Monthly Payment": central.getCardLayout().show(central, "register"); break;
 			
-			case "Clear Month": central.getCardLayout().show(central, "register"); break;	
+			case "Clear Month": 
+				int option = JOptionPane.showConfirmDialog(null, "Be sure to generate the monthly registers first! \n"
+						+ "All data will be deleted now,"
+						+ " do you want to continue?");
+				if (option == JOptionPane.YES_OPTION) {
+					for (Vehicle o : OfficialList.getOfficialList()) {
+						o.setParkedTime(new Date(0));
+					}
+					
+					for (Vehicle r : ResidentList.getResidentList()) {
+						r.setTotalMinutes(0);
+						r.setParkedTime(new Date(0));
+					}
+				}
+				break;	
 			
 			case "Back": central.getCardLayout().show(central, "initial"); break;
 		}	
