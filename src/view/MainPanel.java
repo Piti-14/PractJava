@@ -65,7 +65,7 @@ public class MainPanel extends JPanel {
 		JButton addResidentVehicleBtn = new JButton("Add Resident Vehicle");
 		addResidentVehicleBtn.addActionListener(mpController);
 		
-		JButton residentPaymentBtn = new JButton("Generate Monthly Payment");
+		JButton residentPaymentBtn = new JButton("Monthly Payment");
 		residentPaymentBtn.addActionListener(mpController);
 		
 		JButton resetBtn = new JButton("Clear Month");
@@ -95,7 +95,7 @@ public class MainPanel extends JPanel {
 		JMenuItem addResidentVehicleMenuBtn = new JMenuItem("Add Resident Vehicle");
 		addResidentVehicleMenuBtn.addActionListener(mpController);
 			
-		JMenuItem paymentsBtn = new JMenuItem("Generate Monthly Payments");
+		JMenuItem paymentsBtn = new JMenuItem("Monthly Payment");
 		paymentsBtn.addActionListener(mpController);
 		
 		JMenuItem newMonthBtn = new JMenuItem("Clear Month");

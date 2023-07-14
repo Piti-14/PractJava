@@ -10,8 +10,8 @@ public class Pruebas {
 		MainFrame mf = new MainFrame();
 		
 		
-		
-		Date d = new Date(Long.parseLong("168925433087"));
-		System.out.println(d);
+		//System.out.printf("%-10s | %-10s | %-10s", "License Plate", "Parked Time (min)", "Ticket Price ($)");
+		//Date d = new Date(Long.parseLong("168925433087"));
+		//System.out.println(d);
 	}
 }

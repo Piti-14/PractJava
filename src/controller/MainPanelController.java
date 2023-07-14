@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import model.OfficialList;
+import model.Registration;
 import model.ResidentList;
 import model.Vehicle;
 import view.CentralPanel;
@@ -30,7 +31,14 @@ public class MainPanelController implements ActionListener{
 			
 			case "New Exit Registry": central.getCardLayout().show(central, "exit"); break;
 			
-			case "Generate Monthly Payment": central.getCardLayout().show(central, "register"); break;
+			case "Monthly Payment": 
+				String registry = JOptionPane.showInputDialog("Enter registry name:");
+				if (registry != null && !registry.isEmpty()) {
+					Registration.saveNewPaymentRegistry(registry);
+				} else {
+					System.out.println("No has introducido un nombre válido para el archivo");
+				}
+				break;
 			
 			case "Clear Month": 
 				int option = JOptionPane.showConfirmDialog(null, "Be sure to generate the monthly registers first! \n"

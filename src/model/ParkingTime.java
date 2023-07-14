@@ -34,4 +34,9 @@ public class ParkingTime {
 		entryTime = null;
 		exitTime = null;
 	}
+	
+	public String toString() {
+		return "Entry at: " + entryTime + "\n" +
+				"Exit at: " + exitTime;
+	}
 }
