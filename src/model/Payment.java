@@ -6,7 +6,7 @@ public class Payment {
 		double ticket;
 		
 		if (v instanceof NonResident) {
-			ticket = v.getMinutePrice() * v.stayedTime.totalTime();
+			ticket = v.getMinutePrice() * (v.stayedTime.totalTime() + v.getTotalMinutes());
 		} else {
 			Resident car = (Resident)v;
 			ticket = car.getMinutePrice() * car.getTotalMinutes();

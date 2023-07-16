@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class ResidentList {
 	
-	private static ArrayList<Resident> residentVehicles = new ArrayList<Resident>();
+	private static ArrayList<Resident> residentVehicles = new ArrayList<>();
 	
 	public static void readVehicleData(String file) {
 		
@@ -18,7 +18,7 @@ public class ResidentList {
 			BufferedReader read = new BufferedReader(new FileReader(file));
 			String line = read.readLine();
 			
-			while(line != null) {
+			while(line != null && !(line.equals(""))) {
 				
 				String[] data = line.split(",");
 				Resident r = new Resident(data[0]);

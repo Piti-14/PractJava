@@ -41,7 +41,7 @@ public abstract class Vehicle {
 	}
 	
 	public void clearStayedTime() {
-		this.stayedTime.reset();
+		stayedTime.reset();
 	}
 	
 	public void setMonthlyMinutes(long minutes) {
@@ -54,6 +54,10 @@ public abstract class Vehicle {
 	
 	public void setTotalMinutes(int minutes) {
 		this.totalMinutes = minutes;
+	}
+
+	public String toString() {
+		return plate;
 	}
 	
 	/*public void saveStaysRegistry() {

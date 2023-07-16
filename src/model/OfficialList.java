@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class OfficialList {
 	
-	private static ArrayList<Official> officialVehicles = new ArrayList<Official>();
+	private static ArrayList<Official> officialVehicles = new ArrayList<>();
 	
 	public static void readVehicleData(String file) {
 		
@@ -18,7 +18,7 @@ public class OfficialList {
 			BufferedReader read = new BufferedReader(new FileReader(file));
 			String line = read.readLine();
 			
-			while(line != null) {
+			while(line != null && !(line.equals(""))) {
 				String[] data = line.split(",");
  				Official v = new Official(data[0]);
  				Date entry = new Date(Long.parseLong(data[1]));

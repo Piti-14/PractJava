@@ -7,7 +7,15 @@ public class ParkingTime {
 	private Date entryTime;
 	private Date exitTime;
 	
-	public ParkingTime() {}
+	public ParkingTime() {
+		entryTime = new Date(0);
+		exitTime = new Date(0);
+	}
+
+	public ParkingTime(Date entryTime, Date exitTime){
+		this.entryTime = entryTime;
+		this.exitTime = exitTime;
+	}
 	
 	public void setEntryTime(Date entry) {
 		this.entryTime = entry;
@@ -31,8 +39,8 @@ public class ParkingTime {
 	}
 	
 	public void reset() {
-		entryTime = null;
-		exitTime = null;
+		entryTime = new Date(0);
+		exitTime = new Date(0);
 	}
 	
 	public String toString() {

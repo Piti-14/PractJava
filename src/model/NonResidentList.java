@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 public class NonResidentList {
 	
@@ -18,7 +19,7 @@ public class NonResidentList {
 			BufferedReader read = new BufferedReader(new FileReader(file));
 			String line = read.readLine();
 			
-			while(line != null) {
+			while(line != null && !(line.equals(""))) {
 				String[] data = line.split(",");//plate,minutes,date
  				NonResident nr = new NonResident(data[0]);
  				nr.setMonthlyMinutes(Integer.parseInt(data[1]));
@@ -49,8 +50,15 @@ public class NonResidentList {
 		nonResidentVehicles.add(nr);
 	}
 	
-	public static void clearNonResidents() {
-		nonResidentVehicles.clear();
+	public static void removeNonResident(NonResident nr) {
+		Iterator<NonResident> i = nonResidentVehicles.iterator();
+		while (i.hasNext()) {
+			NonResident nonResident = i.next();
+			if (nonResident.getPlate().equals(nr.getPlate())) {
+				i.remove();
+				break;
+			}
+		}
 	}
 	
 	public static void saveVehicleData(String file) {
@@ -67,7 +75,6 @@ public class NonResidentList {
 				}
 				write.newLine();
 			}
-			
 			write.close();
 			
 		} catch (IOException e) {

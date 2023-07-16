@@ -4,6 +4,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import model.NonResidentList;
 import model.OfficialList;
+import model.Registration;
 import model.ResidentList;
 
 public class MainFrameController implements WindowListener{
@@ -26,13 +27,9 @@ public class MainFrameController implements WindowListener{
 		OfficialList.saveVehicleData(OFFICIAL_VEHICLES);
 		ResidentList.saveVehicleData(RESIDENT_VEHICLES);
 		NonResidentList.saveVehicleData(NON_RESIDENT_VEHICLES);
-		
-		/*for (NonResident vehicle : NonResidentList.getNonResidentList()) {
-			vehicle.getParkingTime().setExitTime(new Date());
-			double ticket = Payment.calculatePayment(vehicle);
-			JOptionPane.showMessageDialog(null, "You owe " + ticket + "$, "
-					+ "\ngrab the ticket and pay it at the attendant's hut.") ;
-		}*/
+		Registration.saveOfficialStaysRegistry();
+		Registration.saveResidentStaysRegistry();
+
 		System.exit(0);
 	}
 

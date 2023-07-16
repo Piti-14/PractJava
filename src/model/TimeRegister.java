@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
@@ -44,11 +45,14 @@ public class TimeRegister {
 			searchAndVerifyExit(ResidentList.getResidentList());
 		}
 		if (!registered) {
-			NonResident nr = new NonResident(plate);
 			if (NonResidentList.getNonResidentList().size() == 0) {
-				nr.setParkedTime(new Date());
+				JOptionPane.showMessageDialog(null, "No such vehicle parked!");
 			} else {
 				searchAndVerifyExit(NonResidentList.getNonResidentList());
+				NonResidentList.removeNonResident(new NonResident(plate));
+				if (!registered) {
+					JOptionPane.showMessageDialog(null, "No such vehicle parked!");
+				}
 			}
 		}
 		registered = false;
@@ -73,10 +77,10 @@ public class TimeRegister {
 		for (Vehicle v : list) {
 			
 			if (v.getPlate().equals(plate)) {
-				if (v.getParkingTime().getExitTime() == null && !(v.getParkingTime().getEntryTime().equals(new Date(0)))) {//Vehicle is still parked
+				if (v.getParkingTime().getExitTime().equals(new Date(0)) && !(v.getParkingTime().getEntryTime().equals(new Date(0)))) {//Vehicle is still parked
 					
 					v.getParkingTime().setExitTime(new Date());
-					ParkingTime stay = v.getParkingTime();
+					ParkingTime stay = new ParkingTime(v.getParkingTime().getEntryTime(), v.getParkingTime().getExitTime());
 					
 					if (v instanceof Official) {
 						v.addStay(stay);
@@ -89,7 +93,6 @@ public class TimeRegister {
 						double ticket = Payment.calculatePayment(v);
 						JOptionPane.showMessageDialog(null, "You owe " + ticket + "$, "
 								+ "\ngrab the ticket and pay it at the attendant's hut.");
-						NonResidentList.getNonResidentList().remove(v);
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Vehicle not parked yet.");
