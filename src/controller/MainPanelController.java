@@ -2,9 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 import javax.swing.JOptionPane;
-import model.OfficialList;
 import model.Registration;
 import model.ResidentList;
 import model.Vehicle;
@@ -22,11 +20,11 @@ public class MainPanelController implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		switch (e.getActionCommand()) {
-			case "Add Official Vehicle" -> central.getCardLayout().show(central, "registerOfficial");
-			case "Add Resident Vehicle" -> central.getCardLayout().show(central, "registerResident");
-			case "New Entry Registry" -> central.getCardLayout().show(central, "entry");
-			case "New Exit Registry" -> central.getCardLayout().show(central, "exit");
-			case "Monthly Payment" -> {
+			case "Add Official Vehicle": central.getCardLayout().show(central, "registerOfficial"); break;
+			case "Add Resident Vehicle": central.getCardLayout().show(central, "registerResident"); break;
+			case "New Entry Registry": central.getCardLayout().show(central, "entry"); break;
+			case "New Exit Registry": central.getCardLayout().show(central, "exit"); break;
+			case "Monthly Payment":
 				String registry = JOptionPane.showInputDialog("Enter registry name:");
 				if (registry != null && !registry.isEmpty()) {
 					Registration.saveNewPaymentRegistry(registry);
@@ -36,9 +34,9 @@ public class MainPanelController implements ActionListener{
 				} else if (registry != null && registry.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Enter a name for the file\n" +
 							"E.g. (Resident_Payments_[MONTH])");
-				}
-			}
-			case "Clear Month" -> {
+				};
+				break;
+			case "Clear Month":
 				int option = JOptionPane.showConfirmDialog(null, "Be sure to generate the monthly registers first! \n"
 						+ "All data will be deleted now,"
 						+ " do you want to continue?");
@@ -54,9 +52,9 @@ public class MainPanelController implements ActionListener{
 						//r.setParkedTime(new Date(0));
 					}
 					JOptionPane.showConfirmDialog(null, "Registries generated. Month cleared correctly.");
-				}
-			}
-			case "Back" -> central.getCardLayout().show(central, "initial");
+				};
+				break;
+			case "Back": central.getCardLayout().show(central, "initial"); break;
 		}
 	}
 }
