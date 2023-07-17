@@ -41,9 +41,6 @@ public class MainPanelController implements ActionListener{
 						+ "All data will be deleted now,"
 						+ " do you want to continue?");
 				if (option == JOptionPane.YES_OPTION) {
-					/*for (Vehicle o : OfficialList.getOfficialList()) {
-						o.setParkedTime(new Date(0));
-					}*/
 					Registration.clearMonthlyRegistries(Registration.getOfficials());
 					Registration.clearMonthlyRegistries(Registration.getResidents());
 

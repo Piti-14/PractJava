@@ -12,6 +12,7 @@ public class Registration {
 	private static final String OFFICIAL_VEHICLES_STAYS_REGISTRY = "src/recursos/OfficialStays";
 	private static final String RESIDENT_VEHICLES_STAYS_REGISTRY = "src/recursos/ResidentStays";
 	
+	//Se puede eliminar uno de los metodos y hacer que se pida como parámetro el nombre del archivo
 	public static void saveOfficialStaysRegistry() {
 		String header = String.format("%-10s | %-29s | %-29s", "License Plate", "Entry", "Exit");
 		try {
@@ -45,9 +46,9 @@ public class Registration {
 			writer.write(header);
 			writer.newLine();
 			writer.write("-----------------------------------------------------------------------------\n");
-			for (Official o : OfficialList.getOfficialList()) {
-				for (ParkingTime stay : o.stays) {
-					String plate = o.getPlate();
+			for (Resident r : ResidentList.getResidentList()) {
+				for (ParkingTime stay : r.stays) {
+					String plate = r.getPlate();
 					String entry = stay.getEntryTime().toString();
 					String exit = stay.getExitTime().toString();
 
